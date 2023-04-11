@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions, Scope & Closures in JavaScript</title>
+    <style>
+        body{
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        background-color: #f2ead8;
+        display: grid;
+        font-family: "Trirong", serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Use of custom functions.</h1>
+    <script type="text/javascript">
+
+    hello("Bhavana"+"<br>");
+    var ans = square(cube(2));
+    document.write("Square & Cube of number is " + ans + "<br>");
+
+    //display the prime number between 1 to 100
+    document.write("Prime Number between 1 to 100 :");
+     
+    for(i = 1; i<=100 ; i++)
+    {
+        if(isprime(i) == 1)
+        {
+            document.write(i + "<br>");
+        }
+    }    
+
+    function hello(name)
+    {
+        document.write("Hello " + name);
+    }
+
+    function square(num)
+    {
+        var temp;
+        temp = num * num;
+        return(temp);
+    }
+
+    function cube(num)
+    {
+        var temp;
+        temp = num * num * num;
+        return(temp);
+    }
+
+    function isprime(num)
+    {
+        var i  = 2;
+        while(i < num)
+        {
+            if(num % i == 0)
+            {
+                return(0);
+            }
+            i++;
+        }
+        return(1);
+    }
+
+    document.write("<h1>Variables that are scoped within different functions.</h1>");
+
+    //Global Scope
+    var a =5;
+    var b = 10;
+
+    //Function Scope
+    function myFunc()
+    {
+        let x = 3 + a; //local variable
+        document.write(x + "<br>");
+    }
+
+    //Function Scope
+    function otherFunc()
+    {
+        let y = 12 + b; // local variable
+        document.write(y + "<br>");
+
+    //Block Scope
+    {
+        let i = 23;
+        let j = 15;
+        document.write(i, j + "<br>");
+    }
+
+    //ReferenceError
+    //console.log(i,j);
+   }
+
+   myFunc();
+   otherFunc();
+
+   document.write("<h1>Closures that capture and use variables from an outer function.</h1>");
+    // closure example
+
+    function calculate(x)
+     {
+         function multiply(y)
+          {
+              return x * y;
+          }
+         return multiply;
+     }
+
+    const multiply3 = calculate(3);
+    const multiply4 = calculate(4);
+
+    document.write(multiply3 + "<br>"); // returns calculate function definition
+    document.write(multiply3()+ "<br>"); // NaN
+
+    document.write(multiply3(6)+ "<br>"); // 18
+    document.write(multiply4(2)+ "<br>"); // 8
+
+    </script>
+</body>
+</html>
